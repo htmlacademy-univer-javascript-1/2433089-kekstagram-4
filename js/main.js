@@ -19,14 +19,6 @@ const getRandomNumber = (min, max) => {
   return Math.floor(result);
 };
 
-const shuffle = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
-
 const getComment = (_, id) => {
   const comment = {
     id,
@@ -47,7 +39,7 @@ const getPost = (_, id) => {
   const photo = {
     id,
     url: `photos/${id}.jpg`,
-    description: `Люблю это фото`,
+    description: `Фото ${id}`,
     likes: getRandomNumber(MIN_COUNT_LIKES, MAX_COUNT_LIKES),
     comments: Array.from( {length: getRandomNumber(MIN_COUNT_COMMENTS, MAX_COUNT_COMMENTS)}, getComment)
   };
