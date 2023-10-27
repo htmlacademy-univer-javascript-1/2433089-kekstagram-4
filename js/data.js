@@ -1,4 +1,4 @@
-import { getRandomNumber } from "./util.js";
+import { getRandomNumber } from './util.js';
 
 const MIN_INDEX_AVATAR = 1;
 const MAX_INDEX_AVATAR = 6;
