@@ -1,10 +1,6 @@
-import { getRandomNumber, getComment } from './util.js';
-
-const COUNT_POSTS = () => 25;
-const MIN_COUNT_LIKES = () => 15;
-const MAX_COUNT_LIKES = () => 200;
-const MIN_COUNT_COMMENTS = () => 0;
-const MAX_COUNT_COMMENTS = () => 30;
+import { getRandomNumber } from './util.js';
+import { MIN_COUNT_LIKES, MAX_COUNT_LIKES, MIN_COUNT_COMMENTS, MAX_COUNT_COMMENTS } from './data.js';
+import { getComment } from './create-comments.js';
 
 const getPost = (_, id) => {
   id++;
@@ -18,4 +14,4 @@ const getPost = (_, id) => {
   return photo;
 };
 
-export {getPost, COUNT_POSTS};
+export {getPost};
