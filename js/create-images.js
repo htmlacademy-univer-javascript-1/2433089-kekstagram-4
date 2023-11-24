@@ -1,5 +1,5 @@
 import { getRandomNumber } from './util.js';
-import { MIN_COUNT_LIKES, MAX_COUNT_LIKES, MIN_COUNT_COMMENTS, MAX_COUNT_COMMENTS } from './data.js';
+import { MIN_COUNT_LIKES, MAX_COUNT_LIKES, MIN_COUNT_COMMENTS, MAX_COUNT_COMMENTS, COUNT_POSTS } from './data.js';
 import { getComment } from './create-comments.js';
 
 const getPost = (_, id) => {
@@ -14,4 +14,7 @@ const getPost = (_, id) => {
   return photo;
 };
 
-export {getPost};
+const generatePosts = () => Array.from({length: COUNT_POSTS}, getPost);
+
+export {generatePosts};
+

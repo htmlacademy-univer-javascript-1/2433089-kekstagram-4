@@ -1,6 +1,3 @@
-import { getPost } from './create-images.js';
-import { COUNT_POSTS } from './data.js';
+import { createPictures } from './create-pictures.js';
 
-Array.from({length: COUNT_POSTS}, getPost);
-
-
+createPictures();
