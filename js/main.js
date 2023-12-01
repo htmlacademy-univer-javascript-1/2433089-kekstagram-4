@@ -1,3 +1,9 @@
-import { createPictures } from './create-pictures.js';
+import { getPictures } from './modules/create-pictures.js';
+import { renderThumbnail } from './modules/render-thumbnail.js';
+import { addEventListenerToPicture } from './modules/render-big-picture.js';
 
-createPictures();
+const pictures = getPictures();
+
+renderThumbnail(pictures);
+
+addEventListenerToPicture(pictures);
