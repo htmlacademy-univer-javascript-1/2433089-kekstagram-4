@@ -1,9 +1,10 @@
-import { getPictures } from './modules/create-pictures.js';
-import { renderThumbnail } from './modules/render-thumbnail.js';
-import { addEventListenerToPicture } from './modules/render-big-picture.js';
+import './data.js';
+import {PHOTOS_COUNT, createImage } from './data.js';
+import {createPictures} from './create-pictures.js';
+import { initPictures } from './create-big-picture.js';
 
-const pictures = getPictures();
+const pictures = Array.from( {length: PHOTOS_COUNT}, createImage);
 
-renderThumbnail(pictures);
+createPictures(pictures);
 
-addEventListenerToPicture(pictures);
+initPictures(pictures);

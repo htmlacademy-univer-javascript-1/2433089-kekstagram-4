@@ -1,35 +1,31 @@
-import { AVATAR_COUNT, MESSAGES, NAMES, LIKE_MAX_COUNT, DESCRIPTIONS, COMMENT_MAX_COUNT, IMAGE_COUNT } from './constant.js';
-import { getRandomInteger, getRandomElement } from './utils.js';
+const pictureFragments = document.createDocumentFragment();
+const picturesTemplate = document.querySelector('#picture')
+  .content
+  .querySelector('a');
 
-const getId = () => {
-  let lastGeneratedId = 0;
+const createPicture = (picture) => {
+  const currentPicture = picturesTemplate.cloneNode(true);
+  currentPicture.querySelector('img').src = picture.url;
+  currentPicture.querySelector('img').alt = picture.description;
+  currentPicture.querySelector('.picture__comments').textContent = picture.comments.length;
+  currentPicture.querySelector('.picture__likes').textContent = picture.likes;
 
-  return function () {
-    lastGeneratedId++;
-    return lastGeneratedId;
-  };
+  currentPicture.dataset.id = picture.id;
+
+  pictureFragments.append(currentPicture);
+
 };
 
-const getImageId = getId();
-const getCommentId = getId();
+const createPictures = (pictures) => {
 
-const createComment = () => ({
-  id: getCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
-  message: getRandomElement(MESSAGES),
-  name: getRandomElement(NAMES),
-});
+  const pictureContainer = document.querySelector('.pictures');
 
-const createPicture = (id) => ({
-  id: id,
-  url: `photos/${id}.jpg`,
-  likes: getRandomInteger(0, LIKE_MAX_COUNT),
-  description: getRandomElement(DESCRIPTIONS),
-  name: getRandomElement(NAMES),
-  comments: Array.from({ length: getRandomInteger(0, COMMENT_MAX_COUNT) }, () => createComment())
-});
+  pictures.forEach((picture) => {
+    createPicture(picture);
+  });
 
-const getPictures = () => Array.from({ length: IMAGE_COUNT }, () => createPicture(getImageId()));
+  pictureContainer.append(pictureFragments);
 
+};
 
-export { getPictures };
+export {createPictures};
