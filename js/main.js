@@ -1,11 +1,18 @@
-import './data.js';
-import {PHOTOS_COUNT, createImage } from './data.js';
-import {createPictures} from './pictures.js';
-import './big-picture.js';
-import {initForm} from './form.js';
-import './hashtag-pristine.js';
+import {getData} from './api.js';
+import {initGallery} from './gallery.js';
+import {hidePopup, initFormUpload} from './form-upload.js';
+import {showAlert} from './utils.js';
+import {initValidation} from './validation.js';
 
-const pictures = Array.from( {length: PHOTOS_COUNT}, createImage);
+const GALLERY_ITEM_COUNT = 25;
 
-createPictures(pictures);
-initForm();
+getData()
+  .then((photos) => {
+    initGallery(photos.slice(0, GALLERY_ITEM_COUNT));
+  })
+  .catch((err) => {
+    showAlert(err.message);
+  });
+
+initFormUpload(initValidation, hidePopup);
+
