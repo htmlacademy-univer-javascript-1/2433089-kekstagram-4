@@ -1,29 +1,46 @@
-const getRandomInteger = (a,b) => {
-  const upper = Math.floor(Math.max(a,b));
-  const lower = Math.ceil(Math.min(a,b));
-  const result = Math.random() * (upper - lower + 1) + lower;
+const ALERT_SHOW_TIME = 5000;
 
-  return Math.floor(result);
+const ALERT_STYLES = {
+  zIndex : '100',
+  position : 'absolute',
+  left : '0',
+  top : '0',
+  right : '0',
+  padding : '10px 3px',
+  fontSize : '30px',
+  lineHeight : '36px',
+  textAlign : 'center',
+  backgroundColor : '#232321',
+  color: '#ffffff'
 };
 
-const createRandomIdFromRangeGenerator = (min, max) => {
-  const formerValues = [];
+//Функция для проверки длины строки.
+export const checkLength = (array, maxLength) => array.length <= maxLength;
 
-  return function () {
-    let actualValue = getRandomInteger(min, max);
-
-    while (formerValues.includes(actualValue)) {
-      actualValue = getRandomInteger(min, max);
-    }
-
-    formerValues.push(actualValue);
-
-    return actualValue;
-  };
+// Функция для проверки на уникальные значения в массиве
+export const checkRepeats = (array) => {
+  const toUpper = array.map((item) => item.toUpperCase());
+  const arrayNoRepeats = new Set(toUpper);
+  return arrayNoRepeats.size === toUpper.length;
 };
 
-const isEscKey = (evt) => evt.key === 'Escape';
+//Функция проверки нажатой клавиши Esc
+export const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const createImageUrl = (id, derictory, format) => derictory + id + format;
+//Функция проверки нажатой клавиши Enter
+export const isEnterKey = (evt) => evt.key === 'Enter';
 
-export {getRandomInteger, createRandomIdFromRangeGenerator, createImageUrl, isEscKey};
+//Функция для удаления последнего символа в строке
+export const removeLastCharacter = (string) => string ? string.slice(0, -1) : string;
+
+// Функция для вывода окна с сообщением
+export const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  Object.assign(alertContainer.style, ALERT_STYLES);
+  alertContainer.textContent = message;
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
